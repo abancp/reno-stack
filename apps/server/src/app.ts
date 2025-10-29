@@ -3,7 +3,6 @@ import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { env } from "../env";
 import { auth, type HonoAppContext } from "./auth";
-import { notes } from "./routes/notes";
 
 const app = new Hono<HonoAppContext>()
   // ------------------------------------------------------------
@@ -40,7 +39,6 @@ const app = new Hono<HonoAppContext>()
     return auth.handler(c.req.raw);
   })
   .get("/", (c) => c.json({ message: "Hello World" }))
-  .route("/notes", notes);
 
 export default app;
 

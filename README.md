@@ -58,7 +58,7 @@ Create a Discord application [here](https://discord.com/developers/applications)
 http://localhost:8000/api/auth/callback/discord
 ```
 
-Add `DISCORD_CLIENT_ID` and `DISCORD_CLIENT_SECRET` to `.env`. If you change the server's port, update `VITE_SERVER_URL` and the redirect URI.
+If you change the server's port, update `VITE_SERVER_URL` and the redirect URI.
 
 Visit `http://localhost:5173` to start building! 🚀
 
