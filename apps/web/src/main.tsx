@@ -1,6 +1,7 @@
 import { RouterProvider, createRouter } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import { sessionFetcher } from "./utils/sessionFetcher";
 
 // Import the generated route tree
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -22,6 +23,7 @@ const router = createRouter({
   routeTree,
   context: {
     queryClient,
+    sessionFetcher
   },
   defaultPreload: "intent",
   // Since we're using React Query, we don't want loader calls to ever be stale

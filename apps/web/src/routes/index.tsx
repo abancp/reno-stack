@@ -9,7 +9,7 @@ function Index() {
   return (
     <div className="p-2 flex flex-col gap-4 items-center justify-center">
       <div className="flex flex-col items-center justify-center gap-6 py-12">
-        <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 drop-shadow-lg animate-fade-in">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-transparent bg-clip-text bg-linear-to-r from-blue-500 via-purple-500 to-pink-500 drop-shadow-lg animate-fade-in">
           Welcome to{" "}
           <span className="underline decoration-wavy decoration-4 decoration-pink-400">
             Reno Stack

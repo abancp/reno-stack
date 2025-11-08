@@ -7,9 +7,11 @@ import {
   Outlet,
 } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
+import { Session } from "../utils/auth-client";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
+  sessionFetcher : () => Promise<Session | null>
 }>()({
   component: RootComponent,
   notFoundComponent: () => {
