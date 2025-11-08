@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "mysql",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1762574152955,
+      "tag": "0000_bent_maginty",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1762575105472,
+      "tag": "0001_deep_masked_marvel",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1762575718788,
+      "tag": "0002_clever_mephistopheles",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1762575894792,
+      "tag": "0003_curious_tempest",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1762578353305,
+      "tag": "0004_flippant_terror",
+      "breakpoints": true
+    }
+  ]
+}
