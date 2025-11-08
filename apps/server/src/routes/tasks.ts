@@ -9,7 +9,10 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
   .use("*", withAuth)
   .get("/", async (c) => {
     try {
-      const rows = await db.select().from(task);
+      const session = c.get("session");
+      if (!session) return err("Unauthorized : Please Login", 401);
+      const userid = session.userId;
+      const rows = await db.select().from(task).where(eq(task.userid, userid));
       return ok(rows);
     } catch {
       return err("Something went wrong!", 500);
@@ -18,7 +21,7 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
   .post("/", async (c) => {
     try {
       const session = c.get("session");
-      if (!session) return err("Unauthorized", 401);
+      if (!session) return err("Unauthorized : Please Login", 401);
       const { title } = await c.req.json();
       const userid = session.userId;
       const id = crypto.randomUUID();
@@ -39,11 +42,11 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
       return err("Something went wrong!", 500);
     }
   })
-  .patch("/", async (c) => {
+  .patch("/:id", async (c) => {
     try {
       const session = c.get("session");
       if (!session) return err("Unauthorized : Please Login", 401);
-      const { id } = await c.req.json();
+      const id = c.req.param("id");
       const userid = session.userId;
 
       const [currentTask] = await db
@@ -66,12 +69,12 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
       return err("Something went wrong!", 500);
     }
   })
-  .delete("/", async (c) => {
+  .delete("/:id", async (c) => {
     try {
       const session = c.get("session");
       if (!session) return err("Unauthorized : Please Login", 401);
       const userid = session.userId;
-      const { id } = await c.req.json();
+      const id = c.req.param("id");
       const [currentTask] = await db
         .select({
           id: task.id,
