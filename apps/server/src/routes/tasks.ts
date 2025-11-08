@@ -53,18 +53,23 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
         .select({
           id: task.id,
           completed: task.completed,
+          title: task.title,
         })
         .from(task)
         .where(and(eq(task.id, id), eq(task.userid, userid)));
 
       if (!currentTask) return err("Task not found", 404);
-
+      const newCompleted = !currentTask.completed;
       await db
         .update(task)
-        .set({ completed: !currentTask.completed })
+        .set({ completed: newCompleted })
         .where(and(eq(task.id, id), eq(task.userid, userid)));
 
-      return ok({ message: "Task updated successfully" });
+      return ok({
+        id,
+        title: currentTask.title,
+        completed: newCompleted,
+      });
     } catch {
       return err("Something went wrong!", 500);
     }
