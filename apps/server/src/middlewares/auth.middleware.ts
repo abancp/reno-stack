@@ -2,29 +2,37 @@ import { createMiddleware } from "hono/factory";
 
 import { HTTPException } from "hono/http-exception";
 import type { HonoAppContext } from "../auth.ts";
+import { err } from "../utils/response.js";
 
 export const withAuth = createMiddleware<HonoAppContext<"IsAuthenticated">>(
   async (c, next) => {
-    const user = c.get("user");
+    try {
+      const user = c.get("user");
 
-    if (!user) {
-      throw new HTTPException(401, { message: "Please login" });
+      if (!user) {
+        err("Unauthorized , Please Login", 500);
+      }
+
+      await next();
+    } catch {
+      err("Something went wrong!")
     }
-
-    await next();
   }
 );
 
 export const withoutAuth = createMiddleware<
   HonoAppContext<"IsNotAuthenticated">
 >(async (c, next) => {
-  const user = c.get("user");
+  try {
 
-  if (user) {
-    throw new HTTPException(400, {
-      message: "Only non-authenticated users can access this route",
-    });
+    const user = c.get("user");
+
+    if (user) {
+      err("Only non-authenticated users can access this route");
+    }
+
+    await next();
+  } catch {
+    err("Something went wrong!")
   }
-
-  await next();
 });
