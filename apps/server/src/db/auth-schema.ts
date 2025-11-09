@@ -47,10 +47,12 @@ export const account = mysqlTable("account", {
   accessToken: text("accessToken"),
   refreshToken: text("refreshToken"),
   idToken: text("id_token"),
-  accessTokenExpiresAt: timestamp("accessTokenExpiresAt", { mode: "date" })
-    .$type<Date | null>(),
-  refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt", { mode: "date" })
-    .$type<Date | null>(),
+  accessTokenExpiresAt: timestamp("accessTokenExpiresAt", {
+    mode: "date",
+  }).$type<Date | null>(),
+  refreshTokenExpiresAt: timestamp("refreshTokenExpiresAt", {
+    mode: "date",
+  }).$type<Date | null>(),
   scope: text("scope"),
   password: text("password"),
   createdAt: timestamp("createdAt", { mode: "date" }).defaultNow().notNull(),

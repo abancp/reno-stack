@@ -18,7 +18,7 @@ const app = new Hono<HonoAppContext>()
       exposeHeaders: ["Content-Length"],
       maxAge: 600,
       credentials: true,
-    })
+    }),
   )
   // ------------------------------------------------------------
   // AUTH

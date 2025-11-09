@@ -15,16 +15,15 @@ export const withAuth = createMiddleware<HonoAppContext<"IsAuthenticated">>(
 
       await next();
     } catch {
-      err("Something went wrong!")
+      err("Something went wrong!");
     }
-  }
+  },
 );
 
 export const withoutAuth = createMiddleware<
   HonoAppContext<"IsNotAuthenticated">
 >(async (c, next) => {
   try {
-
     const user = c.get("user");
 
     if (user) {
@@ -33,6 +32,6 @@ export const withoutAuth = createMiddleware<
 
     await next();
   } catch {
-    err("Something went wrong!")
+    err("Something went wrong!");
   }
 });
