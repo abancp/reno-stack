@@ -14,7 +14,7 @@ const app = new Hono<HonoAppContext>()
     cors({
       origin: [env.WEB_URL],
       allowHeaders: ["Content-Type", "Authorization"],
-      allowMethods: ["POST", "GET", "OPTIONS"],
+      allowMethods: ["POST", "GET", "OPTIONS", "PATCH", "DELETE"],
       exposeHeaders: ["Content-Length"],
       maxAge: 600,
       credentials: true,
@@ -39,8 +39,8 @@ const app = new Hono<HonoAppContext>()
   .on(["POST", "GET"], "/api/auth/*", (c) => {
     return auth.handler(c.req.raw);
   })
-  .route("/tasks",taskRoute)
-  .get("/", (c) => c.json({ message: "Hello World" }))
+  .route("/tasks", taskRoute)
+  .get("/", (c) => c.json({ message: "Hello World" }));
 
 export default app;
 
