@@ -11,7 +11,7 @@ import { Session } from "../utils/auth-client";
 
 export const Route = createRootRouteWithContext<{
   queryClient: QueryClient;
-  sessionFetcher : () => Promise<Session | null>
+  sessionFetcher: () => Promise<Session | null>;
 }>()({
   component: RootComponent,
   notFoundComponent: () => {

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 export const authClient: ReturnType<typeof createAuthClient> = createAuthClient(
   {
     baseURL: import.meta.env.VITE_SERVER_URL, // The base URL of your auth server
-  }
+  },
 );
 
 /**

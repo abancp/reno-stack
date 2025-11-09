@@ -1,4 +1,9 @@
-import { createFileRoute, Link, redirect, useNavigate } from "@tanstack/react-router";
+import {
+  createFileRoute,
+  Link,
+  redirect,
+  useNavigate,
+} from "@tanstack/react-router";
 import { useMutation } from "@tanstack/react-query";
 import { type FormEvent } from "react";
 
@@ -29,18 +34,18 @@ function LoginPage() {
         email: data.email,
         password: data.password,
       });
-      if (result.error) throw new Error(result.error.message)
-      return result.data
+      if (result.error) throw new Error(result.error.message);
+      return result.data;
     },
     onSuccess: (data) => {
       if (data) {
-        const user = data?.user?.name ?? data?.user?.email
-        toast.success(`Welcome back :  ${user}`,)
+        const user = data?.user?.name ?? data?.user?.email;
+        toast.success(`Welcome back :  ${user}`);
         navigate({ to: "/" });
       }
     },
     onError: (err: unknown) => {
-      toast.error(err instanceof Error ? err.message : "Something went wrong!")
+      toast.error(err instanceof Error ? err.message : "Something went wrong!");
       console.error("Login failed:", err);
     },
   });
@@ -65,23 +70,36 @@ function LoginPage() {
         <CardContent>
           <form onSubmit={handleSubmit} className="space-y-4">
             <Input name="email" type="email" placeholder="Email" required />
-            <Input name="password" type="password" placeholder="Password" required />
+            <Input
+              name="password"
+              type="password"
+              placeholder="Password"
+              required
+            />
 
-            <Button type="submit" className="w-full" disabled={loginMutation.isPending}>
+            <Button
+              type="submit"
+              className="w-full"
+              disabled={loginMutation.isPending}
+            >
               {loginMutation.isPending ? "Loading..." : "Login"}
             </Button>
 
             <div className="flex flex-col gap-1 items-end">
-
               {loginMutation.error != null && (
                 <p className="text-sm w-full text-red-700 text-center bg-red-200 border border-red-300 rounded-md">
-                  {loginMutation.error instanceof Error ? loginMutation.error.message : "Something went wrong!"}
+                  {loginMutation.error instanceof Error
+                    ? loginMutation.error.message
+                    : "Something went wrong!"}
                 </p>
               )}
               <p className="text-sm ">
                 create account
                 <span>
-                  <Link className="text-blue-500" to="/register" > here</Link>
+                  <Link className="text-blue-500" to="/register">
+                    {" "}
+                    here
+                  </Link>
                 </span>
               </p>
             </div>

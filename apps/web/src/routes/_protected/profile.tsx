@@ -44,7 +44,11 @@ function ProfilePage() {
             <p>Welcome to todo list profile</p>
           </div>
 
-          <Button variant="destructive" className="w-full" onClick={handleLogout}>
+          <Button
+            variant="destructive"
+            className="w-full"
+            onClick={handleLogout}
+          >
             Logout
           </Button>
         </CardContent>
