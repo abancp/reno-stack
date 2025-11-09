@@ -84,6 +84,7 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
         .select({
           id: task.id,
           completed: task.completed,
+          title: task.title,
         })
         .from(task)
         .where(and(eq(task.id, id), eq(task.userid, userid)));
@@ -92,7 +93,11 @@ export const taskRoute = new Hono<HonoAppContext<"IsAuthenticated">>()
       await db
         .delete(task)
         .where(and(eq(task.id, id), eq(task.userid, userid)));
-      return ok({ message: "Task deleted" });
+      return ok({
+        id,
+        title: currentTask.title,
+        completed: currentTask.completed,
+      });
     } catch {
       return err("Something went wrong", 500);
     }
