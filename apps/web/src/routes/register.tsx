@@ -13,6 +13,7 @@ import { Card, CardHeader, CardContent, CardTitle } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
 import { Input } from "@repo/ui/input";
 import { toast } from "@repo/ui/toast";
+import Header from "../components/Header";
 
 export const Route = createFileRoute("/register")({
   beforeLoad: async ({ context }) => {
@@ -71,7 +72,8 @@ function RegisterPage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-4">
+    <div className="flex justify-center pt-12 items-center min-h-screen p-4">
+      <Header/>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle>Create Account</CardTitle>

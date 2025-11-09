@@ -4,6 +4,7 @@ import { useSession, authClient } from "../../utils/auth-client";
 import { Card, CardHeader, CardTitle, CardContent } from "@repo/ui/card";
 import { Button } from "@repo/ui/button";
 import { toast } from "@repo/ui/toast";
+import Header from "../../components/Header";
 
 export const Route = createFileRoute("/_protected/profile")({
   beforeLoad: async ({ context }) => {
@@ -30,7 +31,8 @@ function ProfilePage() {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen p-6 bg-background">
+    <div className="flex justify-center pt-12 items-center min-h-screen p-6 bg-background">
+      <Header />
       <Card className="w-full max-w-md border shadow-sm">
         <CardHeader className="flex flex-col items-center space-y-3">
           <CardTitle className="text-xl font-semibold">

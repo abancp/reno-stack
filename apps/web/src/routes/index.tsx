@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useSession } from "../utils/auth-client";
 import { useTasks } from "../hooks/useTasks";
 import { useAddTask } from "../hooks/useAddTask";
@@ -11,6 +11,7 @@ import { Button } from "@repo/ui/button";
 import { Spinner } from "@repo/ui/spinner";
 import { useEditTask } from "../hooks/useEditTask";
 import { EditableTaskTitle } from "../components/EditableTaskTitle";
+import Header from "../components/Header";
 
 export const Route = createFileRoute("/")({
   component: Home,
@@ -22,7 +23,43 @@ function Home() {
 }
 
 function Landing() {
-  return <>Landing</>;
+  return (
+    <div className="min-h-screen  flex items-center justify-center pt-20 bg-linear-to-br from-blue-50 via-white to-purple-50">
+      <Header />
+      <div className="text-center px-4 max-w-md">
+        <div className="mb-6 inline-block p-4 bg-blue-600 rounded-2xl shadow-lg">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="48"
+            height="48"
+            fill="white"
+            viewBox="0 0 16 16"
+          >
+            <path d="M2.5 8a5.5 5.5 0 0 1 8.25-4.764.5.5 0 0 0 .5-.866A6.5 6.5 0 1 0 14.5 8a.5.5 0 0 0-1 0 5.5 5.5 0 1 1-11 0z" />
+            <path d="M15.354 3.354a.5.5 0 0 0-.708-.708L8 9.293 5.354 6.646a.5.5 0 1 0-.708.708l3 3a.5.5 0 0 0 .708 0l7-7z" />
+          </svg>
+        </div>
+        <h1 className="text-4xl font-bold text-gray-900 mb-3">Todo App</h1>
+        <p className="text-gray-600 mb-8">
+          Simple and elegant way to organize your tasks
+        </p>
+        <div className="flex flex-col gap-3 w-full">
+          <Link
+            to="/login"
+            className="w-full px-6 py-3 bg-blue-600 text-white rounded-xl font-medium hover:bg-blue-700 transition-all hover:shadow-lg"
+          >
+            Sign In
+          </Link>
+          <Link
+            to="/register"
+            className="w-full px-6 py-3 bg-white text-gray-700 rounded-xl font-medium hover:bg-gray-50 transition-all border border-gray-200 hover:border-gray-300"
+          >
+            Create Account
+          </Link>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 function TodoApp() {
@@ -35,11 +72,16 @@ function TodoApp() {
   const handleAddTask = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const form = new FormData(e.currentTarget);
-    addTask.mutate(form.get("title") as string);
+    const title = form.get("title");
+    if (typeof title === "string" && title.trim().length > 0) {
+      addTask.mutate(form.get("title") as string);
+      e.currentTarget.reset();
+    }
   };
 
   return (
-    <div className="w-full min-h-screen flex items-center justify-center bg-muted/30 p-6">
+    <div className="w-full min-h-screen flex pt-20 items-center justify-center p-6">
+      <Header />
       <Card className="w-88 shadow-sm border">
         <CardHeader>
           <h1 className="text-lg font-semibold">My Tasks</h1>
